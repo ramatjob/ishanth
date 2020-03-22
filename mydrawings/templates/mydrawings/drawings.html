@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ishanth's Drawings Page</title>
+</head>
+<body style="background-color:powderblue;">
+
+    {% extends 'myhome/base.html' %}
+    {% block content %}
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="myInput" onkeyup="myFunction()">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+<h1 align="center"> It's my drawings page</h1>
+    <br><br>
+
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for info in drawingPageInfo %}
+
+  <div class="col mb-4">
+    <div class="card" style="max-width: 18rem;" id="myCard">
+      <img src="{{ info.image.url }}" class="card-img-top" alt="..." height="150" width="50">
+      <div class="card-body">
+          <a href="{% url 'mydrawings:detail' info.id %}"><h5 class="card-title">{{ info.title }}</h5></a>
+          <p class="card-text">{{ info.description }}</p>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+
+    <script>
+function myFunction() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myCard");
+  li = ul.getElementsByTagName('div/a');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+{% endblock %}
+
+
+
+</body>
+</html>

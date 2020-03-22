@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details Page</title>
+</head>
+<body>
+    {% extends 'myhome/base.html' %}
+    {% block content %}
+
+    <h1>{{ drawing.title }}</h1>
+    <p>{{ drawing.description }}</p>
+    <img src="{{ drawing.image.url }}" height="500" width="500">
+
+    {% endblock %}
+</body>
+</html>

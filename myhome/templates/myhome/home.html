@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ishanth's Home Page</title>
+
+    <style>
+.collapsible {
+  background-color: #715;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 50%;
+  border: 1;
+  text-align: left;
+  outline: 1;
+  font-size: 20px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+</style>
+</head>
+<body style="background-color:powderblue;">
+    {% extends 'myhome/base.html' %}
+    {% block content %}
+
+    <h1 align="center" style="color:blue;"> It's my home page</h1>
+
+    <table border="10px" style="width:200px;" align="center">
+    <tr>
+        <td>
+            <marquee behavior="alternate" direction="right" scrollamount="10" height="100" width="500">
+                {% load static %}
+                <img src="{% static 'myhome/small-tiger.jpg' %}" width="120" height="80" alt="Natural" />
+            </marquee>
+        </td>
+    </tr>
+    </table>
+
+<br><br>
+    <p style="color:red; font-size:200%;">Please click on the below links to see my images</p>
+
+
+                {% for info in homePageInfo %}
+
+<button type="button" class="collapsible">{{ info.title }}</button>
+<div class="content">
+      <p>{{ info.description }}</p><br>
+    <img src="{{ info.image.url }}" height="300" width="300">
+</div>
+
+                {% endfor %}
+
+    <script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+    {% endblock %}
+
+
+
+
+</body>
+</html>
+
